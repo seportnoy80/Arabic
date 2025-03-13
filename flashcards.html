@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>כרטיסיות לימוד</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>📖 כרטיסיות מילים</h1>
-        <ul id="flashcardList"></ul>
-        <button id="clearFlashcards">🗑️ מחק הכל</button>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-lg w-full">
+        <h1 class="text-2xl font-bold mb-4 text-green-600">📖 כרטיסיות מילים</h1>
+        
+        <ul id="flashcardList" class="list-none space-y-3 mb-4 text-lg"></ul>
+        
+        <button id="clearFlashcards" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">🗑️ מחק הכל</button>
         <br>
-        <a href="index.html">🔙 חזרה למשפטים</a>
+        <a href="index.html" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">🔙 חזרה למשפטים</a>
     </div>
 
     <script>
@@ -25,7 +27,7 @@
             let savedFlashcards = JSON.parse(localStorage.getItem("flashcards")) || [];
             savedFlashcards.forEach((sentence, index) => {
                 let li = document.createElement("li");
-                li.innerHTML = `<strong>${sentence.transcription}</strong> - ${sentence.hebrew} | ${sentence.arabic}`;
+                li.innerHTML = `<strong class="text-blue-500">${sentence.transcription}</strong> - ${sentence.hebrew} | ${sentence.arabic}`;
                 flashcardList.appendChild(li);
             });
         }
