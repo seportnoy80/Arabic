@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let savedFlashcards = JSON.parse(localStorage.getItem("flashcards")) || [];
         savedFlashcards.push(sentence);
         localStorage.setItem("flashcards", JSON.stringify(savedFlashcards));
-        alert(`📌 המילה '${sentence.transcription}' נוספה לכרטיסיות!`);
+        alert(`📌 המשפט '${sentence.transcription}' נוספה לכרטיסיות!`);
     }
 
     loadSentences();
