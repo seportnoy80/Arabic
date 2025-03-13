@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const nextSentenceBtn = document.getElementById("nextSentenceBtn");
     const sentenceNumberEl = document.getElementById("sentenceNumber");
 
+
     let sentences = [];
     let sentenceIndex = 0;
 
