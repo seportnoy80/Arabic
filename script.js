@@ -2,17 +2,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const hebrewSentenceEl = document.getElementById("hebrewSentence");
     const transcriptionEl = document.getElementById("transcription");
     const arabicTranslationEl = document.getElementById("arabicTranslation");
-    const newSentenceBtn = document.getElementById("newSentenceBtn");
-    const showTranslationBtn = document.getElementById("showTranslationBtn");
-    const playAudioBtn = document.getElementById("playAudioBtn");
+    const prevSentenceBtn = document.getElementById("prevSentenceBtn");
+    const nextSentenceBtn = document.getElementById("nextSentenceBtn");
+    const sentenceNumberEl = document.getElementById("sentenceNumber");
 
     let sentences = [];
     let sentenceIndex = 0;
 
-    // Load sentences from the JSON file
     async function loadSentences() {
         try {
-            const response = await fetch("sentences.json");
+            const response = await fetch("updated_sentences.json");
             sentences = await response.json();
             sentenceIndex = 0;
             displaySentence();
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // Display the current sentence
     function displaySentence() {
         if (sentences.length === 0) return;
 
@@ -30,32 +28,34 @@ document.addEventListener("DOMContentLoaded", async () => {
         hebrewSentenceEl.textContent = currentSentence.hebrew;
         transcriptionEl.textContent = currentSentence.transcription;
         arabicTranslationEl.textContent = currentSentence.arabic;
-        transcriptionEl.classList.add("hidden");
-        arabicTranslationEl.classList.add("hidden");
+
+        sentenceNumberEl.textContent = `משפט ${sentenceIndex + 1} מתוך ${sentences.length}`;
     }
 
-    // Show translation
-    showTranslationBtn.addEventListener("click", () => {
-        transcriptionEl.classList.remove("hidden");
-        arabicTranslationEl.classList.remove("hidden");
+    nextSentenceBtn.addEventListener("click", () => {
+        if (sentenceIndex < sentences.length - 1) {
+            sentenceIndex++;
+            displaySentence();
+        }
     });
 
-    // Load next sentence
-    newSentenceBtn.addEventListener("click", () => {
-        sentenceIndex = (sentenceIndex + 1) % sentences.length;
-        displaySentence();
+    prevSentenceBtn.addEventListener("click", () => {
+        if (sentenceIndex > 0) {
+            sentenceIndex--;
+            displaySentence();
+        }
     });
 
-    // Play Arabic pronunciation
-    playAudioBtn.addEventListener("click", () => {
-        if (sentences.length === 0) return;
-
-        const arabicText = sentences[sentenceIndex].arabic;
-        const utterance = new SpeechSynthesisUtterance(arabicText);
-        utterance.lang = "ar-SA"; // Arabic voice
-        speechSynthesis.speak(utterance);
+    transcriptionEl.addEventListener("click", () => {
+        saveToFlashcards(sentences[sentenceIndex]);
     });
 
-    // Load sentences on start
+    function saveToFlashcards(sentence) {
+        let savedFlashcards = JSON.parse(localStorage.getItem("flashcards")) || [];
+        savedFlashcards.push(sentence);
+        localStorage.setItem("flashcards", JSON.stringify(savedFlashcards));
+        alert(`📌 המילה '${sentence.transcription}' נוספה לכרטיסיות!`);
+    }
+
     loadSentences();
 });

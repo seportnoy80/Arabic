@@ -8,43 +8,29 @@
 </head>
 <body>
     <div class="container">
-        <h1>כרטיסיות מילים</h1>
+        <h1>📖 כרטיסיות מילים</h1>
         <ul id="flashcardList"></ul>
-        <button id="shuffleBtn">ערבב כרטיסיות</button>
-        <button id="clearBtn">מחק הכל</button>
+        <button id="clearFlashcards">🗑️ מחק הכל</button>
         <br>
-        <a href="index.html">🔙 חזרה לתרגול</a>
+        <a href="index.html">🔙 חזרה למשפטים</a>
     </div>
 
     <script>
         const flashcardList = document.getElementById("flashcardList");
-        const shuffleBtn = document.getElementById("shuffleBtn");
-        const clearBtn = document.getElementById("clearBtn");
+        const clearFlashcards = document.getElementById("clearFlashcards");
 
         function loadFlashcards() {
             flashcardList.innerHTML = "";
-            let savedWords = JSON.parse(localStorage.getItem("savedWords")) || [];
-            savedWords.forEach((word, index) => {
+            let savedFlashcards = JSON.parse(localStorage.getItem("flashcards")) || [];
+            savedFlashcards.forEach((sentence, index) => {
                 let li = document.createElement("li");
-                li.textContent = word;
-                li.addEventListener("click", () => {
-                    savedWords.splice(index, 1);
-                    localStorage.setItem("savedWords", JSON.stringify(savedWords));
-                    loadFlashcards();
-                });
+                li.innerHTML = `<strong>${sentence.transcription}</strong> - ${sentence.hebrew} | ${sentence.arabic}`;
                 flashcardList.appendChild(li);
             });
         }
 
-        shuffleBtn.addEventListener("click", () => {
-            let savedWords = JSON.parse(localStorage.getItem("savedWords")) || [];
-            savedWords.sort(() => Math.random() - 0.5);
-            localStorage.setItem("savedWords", JSON.stringify(savedWords));
-            loadFlashcards();
-        });
-
-        clearBtn.addEventListener("click", () => {
-            localStorage.removeItem("savedWords");
+        clearFlashcards.addEventListener("click", () => {
+            localStorage.removeItem("flashcards");
             loadFlashcards();
         });
 

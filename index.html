@@ -9,17 +9,18 @@
 <body>
     <div class="container">
         <h1>לימוד ערבית מדוברת</h1>
-        
+
         <div class="sentence-box">
+            <button id="prevSentenceBtn">⬅️</button>
             <p id="hebrewSentence">לחץ כדי לקבל משפט</p>
-            <button id="newSentenceBtn">🎲 משפט חדש</button>
+            <button id="nextSentenceBtn">➡️</button>
         </div>
 
+        <p id="sentenceNumber">משפט 1 מתוך 1000</p>
+
         <div class="translation-box">
-            <p id="transcription" class="hidden"></p>
-            <p id="arabicTranslation" class="hidden"></p>
-            <button id="showTranslationBtn">🔍 הצג תרגום</button>
-            <button id="playAudioBtn">🔊 השמע</button>
+            <p id="transcription" class="clickable">לחץ להוספה לכרטיסיות</p>
+            <p id="arabicTranslation"></p>
         </div>
 
         <br>

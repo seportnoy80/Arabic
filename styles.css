@@ -10,7 +10,7 @@ body {
 .container {
     width: 90%;
     max-width: 500px;
-    margin: 50px auto;
+    margin: auto;
     padding: 20px;
     background: white;
     border-radius: 10px;
@@ -22,10 +22,13 @@ h1 {
     margin-bottom: 20px;
 }
 
-.sentence-box, .translation-box {
-    margin-bottom: 20px;
-    padding: 15px;
+.sentence-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     background: #e3f2fd;
+    padding: 15px;
     border-radius: 8px;
 }
 
@@ -44,6 +47,15 @@ button:hover {
     background: #0056b3;
 }
 
-.hidden {
-    display: none;
+.clickable {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.translation-box {
+    margin-top: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
 }
